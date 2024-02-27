@@ -186,38 +186,28 @@ function ascendingOrNot(list, property, bool) {
     //que funciones tengo para filtrar?
     //Filter, ya que filtra y me devuelve un array con los elementos que dieron true
 
-    //Llamo al metodo find(), previamente delcarando una variable
-    let newArray = list.find(beer=> beer[property]).sort( (a,b)=>{
-        if (bool) { //si bool es tru que ordene de menor a mayor
-            if(a[property]<b[property]){
-                return -1}
-        
-                else if(a[property]>b[property]){
-                return 1}
-                
-                else {
-                return 0
-                 }
-        
-        }
-        else{
-            if(a[property]<b[property]){
-                return 1}
-        
-                else if(a[property]>b[property]){
-                return -1}
-                
-                else {
-                return 0
-                 }
-        
-        }
+    //Llamo al metodo filter(), previamente delcarando una variable
 
-    })
+    //1) ordeno la lista segun sea false o true
+    //2) a la lista ordenada le aplico el metodo filter para filtrar por propiedad
+    //3) selecciono de la nueva lista el rango de elementos que me quiero quedar
+    let newArray = /*1*/list.toSorted((a,b)=>{
+        if (bool==false) { 
+            if(a[property]<b[property]){
+                return 1}
+        
+                else if(a[property]>b[property]){
+                return -1}
+                
+                else {
+                return 0
+                 }
+        }
+    })/*2*/.filter(beer=> beer[property])/*3*/.slice(0,10)
     return newArray
 }
 
-let showTheArray = ascendingOrNot(beers,"abv",true);
+let showTheArray = ascendingOrNot(beers,"abv",false);
 console.log(showTheArray);
 
 
